@@ -1,0 +1,389 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+/* Global CSS */
+
+*
+{
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.5s;
+}
+
+html
+{
+    scroll-behavior: smooth;
+}
+
+body
+{
+    margin: 0px;
+}
+
+header, section, footer
+{
+    float: left;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+section:not(#home)
+{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+h2
+{
+    text-transform: uppercase;
+    color: #ec008a;
+    font-size: 46px;
+    margin-bottom: 10px;
+}
+
+h3
+{
+    text-transform: uppercase;
+    color: #ec008a;
+    font-size: 30px;
+}
+
+p
+{
+    color: #171717;
+    font-size: 22px;
+    line-height: 32px;
+    color: #171717;
+    font-weight: 300;
+    margin-top: 10px;
+}
+
+img
+{
+    max-width: 100%;
+}
+
+.img-circle
+{
+    border-radius: 50%;
+}
+
+.grey-bg
+{
+    background: #dadada;
+    min-height: 50px;
+    float: left;
+    width: 100%;
+    padding-bottom: 80px;
+}
+
+.text-right
+{
+    text-align: right;
+}
+
+.mt-60{ margin-top: 60px;}
+
+/* Header CSS */
+
+header
+{
+    height: 75px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: fixed;
+    z-index: 1;
+    background-color: white;
+    padding-top: 5px;
+}
+
+header .logo
+{
+    float: left;
+    margin-top: -5px;
+}
+
+header nav
+{
+    float: right;
+}
+
+header nav li
+{
+    float: left;
+    list-style: none;
+    margin-left: 5px;
+    width: 100px;
+    padding: 12px 10px;
+}
+
+header .container
+{
+    padding: 10px;
+}
+
+.mobile-menu-icon
+{
+    display: none;
+    padding: 8px 12px;
+    font-size: 30px;
+    margin-right: 10px;
+    color: rgb(165, 0, 63);
+    cursor: pointer;
+}
+
+nav li a ,nav li
+{
+    text-decoration: none;
+    color: #ec008a;
+    text-align: center;
+
+}
+
+nav li:hover > a
+{
+    color: white;
+}
+nav li:hover
+{
+    background-color: #ec008a;
+}
+
+.main-menu{
+    float: left;
+    padding: 0px;
+}
+
+/* Home CSS */
+
+#slide-1
+{
+    background-image: url('../imgs/slider-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+#slide-2
+{
+    background-image: url('../imgs/slider-bg2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+
+}
+
+#slide-3
+{
+    background-image: url('../imgs/slider-bg3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+
+}
+
+#home
+{
+
+    height: 100vh;
+
+}
+
+#home .content
+{
+    text-align: center;
+    margin-top: 100px;
+    color: white;
+    position: absolute;
+    width: 100%;
+    bottom: 100px;
+}
+
+#home h1
+{
+    font-size: 35px;
+    text-shadow: 3px 4px 4px rgba(154, 150, 150, 1);
+}
+
+.btn-standard
+{
+    color: rgb(230, 230, 230);
+    font-size: 28px;
+    padding: 12px;
+    text-shadow: 4px 3px 6px rgba(30, 30, 30, 1);
+    background: rgb(165, 0, 63);
+    background: -moz-linear-gradient(62deg, rgb(165, 0, 63) 100%, rgb(250, 0, 20) 40%);
+    background: -webkit-linear-gradient(62deg, rgb(165, 0, 63) 100%, rgb(250, 0, 20) 40%);
+    background: -o-linear-gradient(62deg, rgb(165, 0, 63) 100%, rgb(250, 0, 20) 40%);
+    background: -ms-linear-gradient(62deg, rgb(165, 0, 63) 100%, rgb(250, 0, 20) 40%);
+    background: linear-gradient(332deg, rgb(165, 0, 63) 100%, rgb(250, 0, 20) 40%);
+    -webkit-box-shadow: 4px 5px 12px rgba(50, 50, 50, 0.8);
+    -moz-box-shadow:    4px 5px 12px rgba(50, 50, 50, 0.8);
+    box-shadow:         4px 5px 12px rgba(50, 50, 50, 0.8);
+    text-decoration: none;
+}
+
+.btn-standard:hover
+{
+    background: rgb(126, 10, 54);;
+}
+
+.container
+{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.col-1, .col-2, .col-3
+{
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    box-sizing: border-box;
+}
+
+.row
+{
+    width: 100%;
+    float: left;
+}
+
+.col-1
+{
+    width: 100%;
+}
+
+.col-2
+{
+    width: 50%;
+}
+
+.col-3
+{
+    width: 33.33%;
+}
+
+
+
+/* Divider CSS*/
+
+.divider
+{
+    background-image: url('../imgs/separator-bg.jpg');
+    background-repeat: none;
+    background-size: cover;
+    background-position: top center;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.divider p, .divider h3
+{
+    color: white;
+}
+
+.divider h3
+{
+    font-size: 46px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.icon-content-wraper
+{
+    text-align: center;
+}
+
+.icon-content-wraper p{
+    font-size: 20px;
+    line-height: 30px;
+    padding-top: 0 15px;
+}
+.icon-wraper
+{
+    color: white;
+    background: rgb(165, 0, 63);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    padding: 32px;
+    font-size: 50px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.7);
+}
+
+/* Footer CSS */
+
+footer
+{
+    min-height: 100px;
+    background-color: rgb(165, 0, 63);
+    padding: 10px 0;
+}
+
+footer p
+{
+    color: white;
+}
+
+@media(min-height: 800px)
+{
+    #home .container
+    {
+        bottom: 300px;
+    }
+}
+
+@media(max-width: 1250px)
+{
+    .container
+    {
+        width: 1000px;
+    }
+}
+
+@media(max-width: 1050px)
+{
+    .container
+    {
+        width: 900px;
+    } 
+}
+
+@media(max-width: 950px)
+{
+    .container
+    {
+        width: 100%;
+        text-align: center;
+     
+    }
+    .col-2, .col-3
+    {
+        width: 100%;
+    }
+    .text-right
+    {
+        text-align: center;
+    }
+    nav
+    {
+        display: none;
+    }
+    .mobile-menu-icon
+    {
+        display: block;
+        float: right;
+    }
+
+   
+    header .container{
+        padding: 0px;
+    }
+    header .logo{
+        padding: 10px;
+    }
+    header{
+        padding: 0;
+    }
+}

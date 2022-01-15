@@ -1,0 +1,12 @@
+.article-progress-bar
+{
+    --scrollAmount: 0%;
+
+    background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 0%, #c669f1 100%);
+    width: var(--scrollAmount);
+    height: 3px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+
