@@ -83,6 +83,19 @@ img
 
 .mt-60{ margin-top: 60px;}
 
+#see_also{
+    height: 28vh;
+}
+#see_also .content
+{
+    text-align: center;
+    margin-top: 100px;
+    color: white;
+    position: absolute;
+    width: 100%;
+    bottom: 50px;
+}
+
 /* Header CSS */
 
 header
@@ -179,6 +192,7 @@ nav li:hover
     background-position: top center;
 
 }
+
 
 #home
 {
@@ -311,7 +325,19 @@ nav li:hover
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.7);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.7);
 }
-
+.icon-wraper-square
+{
+    color: white;
+    background: rgb(165, 0, 63);
+    width: 120px;
+    height: 120px;
+    padding: 32px;
+    font-size: 50px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.7);
+}
 /* Footer CSS */
 
 footer
