@@ -460,4 +460,34 @@ footer p
     header{
         padding: 0;
     }
+    /*for mobile menu */
+    .opened
+    {
+        display: block;
+        background: rgba(255, 255, 255, 1);
+        position: absolute;
+        left: 0;
+        top: 70px;
+        width: 100%;
+
+    }
+    .opened ul
+    {
+        padding-left: 0;
+        width: 100%;
+        margin: 0;
+        border-top: 1px solid rgb(218, 218, 218);
+    }
+    .opened li
+    {
+        width: 100%;
+        margin-left: 0;
+        border-top: 1px solid rgb(218, 218, 218);
+    }
+    .opened a
+    {
+        display: block;
+        font-size: 20px;
+        padding: 20px 10px;
+    }
 }
