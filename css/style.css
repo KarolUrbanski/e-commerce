@@ -32,6 +32,10 @@ section:not(#home)
     padding-bottom: 80px;
 }
 
+a{
+    text-decoration: none;
+}
+
 h2
 {
     text-transform: uppercase;
@@ -82,7 +86,7 @@ img
 }
 
 .mt-60{ margin-top: 60px;}
-
+/* Moving banner in basket */
 #see_also{
     height: 28vh;
 }
@@ -95,7 +99,51 @@ img
     width: 100%;
     bottom: 50px;
 }
+/* Register / Login Form */
+.input-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .input-container > label{
+    position: relative;
+    top: 35px;
+    left: 20px;
+    padding: 0px 10px 0px 10px;
+    text-align: left;
+    letter-spacing: .5px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    color: #333;
+    background: #fff;
+    white-space: nowrap;
+    width: fit-content;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
 
+}
+.input-container > input{
+    display: block;
+    width: 100%;
+    height: 50px;
+    text-align: left;
+    font-size: 1em;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #c4c7c8;
+    box-shadow: none;
+    border-radius: 0;
+
+}
+/* Line for moving lablel when input is clicked or there is something typed in it */
+.input-container >  input:focus + label , .input-container > input:not(:placeholder-shown) ~label{
+            transform:scale(0.95) translateY(-27px) !important;
+            left:5px;
+            color: #ec008a;
+        }
 /* Header CSS */
 
 header

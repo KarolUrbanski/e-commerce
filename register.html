@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-1">
                     <div class="logo">
-                        <img height="60px" src="imgs/logo2.png">
+                        <a href="index.html"><img height="60px" src="imgs/logo2.png"></a> 
                     </div>
                     <a class="mobile-menu-icon">
                         <img height="60px" src="https://icon-library.com/images/menu-button-icon/menu-button-icon-7.jpg" >
@@ -30,7 +30,7 @@
                             <li> <a href="index.html#best_sellers"> Best sellers </a> </li>
                             <li> <a href="products-cattegories.html"> All products </a> </li>
                             <li> <a href="basket.html"> Basket </a> </li>
-                            <li> <a href="register.html"> Login/Register </a> </li>
+                            <li> <a href="#see_also"> Login/Register </a> </li>
                             <li> <a href="index.html#about_us"> About us </a> </li>
                         </ul>
 
@@ -95,34 +95,57 @@
             </div>
             <div class="row icon-content-wraper" >
                 <form>
-                <div class="col-2 ">
-                         <label for="text">Name:</label><br>
-                         <input type="text" id="text" name="text"><br>
-                         <label for="password">Email:</label><br>
-                         <input type="email" id="email" name="email"><br>
-                         <label for="password">Password:</label><br>
-                         <input type="password" id="password" name="password"><br>
-                         <label for="conf_password">Confrim Password:</label><br>
-                         <input type="password" id="conf_password" name="conf_password"><br>
-                         <label for="element_4"> Phone </label><br>
-                         <input type="text" id="phone" name="phone" maxlength="12" placeholder="999-999-999" >
-                     
-                </div>
-                <div class="col-2 ">
-                        <label for="element_1_1">Street Address</label><br>
-                        <input id="element_1_1" name="element_1_1" class="element text large" value="" type="text"><br>
+                <div class="col-2 " >
+                    <div class="input-container">
+                         <input type="text" id="text" name="text" placeholder=" " >
+                         <label for="text" > Name:</label>
+                    </div>
 
-                        <label for="element_1_2">Address Line 2</label><br>
-                        <input id="element_1_2" name="element_1_2" class="element text large" value="" type="text"><br>
-                        
-                        <label for="element_1_3">City</label><br>
-                        <input id="element_1_3" name="element_1_3" class="element text medium" value="" type="text"><br>
-                        
-                        <label for="element_1_4">State / Province / Region</label><br>
-                        <input id="element_1_4" name="element_1_4" class="element text medium" value="" type="text"><br>
-                        
-                        <label for="element_1_5">Postal / Zip Code</label><br>
-                        <input id="element_1_5" name="element_1_5" class="element text medium" maxlength="15" value="" type="text"><br>
+                    <div class="input-container">
+                         <input type="email" id="email" name="email" placeholder=" " >
+                         <label for="password" >Email:</label>
+                     </div>
+
+                    <div class="input-container">
+                         <input type="password" id="password" name="password" placeholder=" ">
+                         <label for="password" >Password:</label>
+                    </div>
+
+                     <div class="input-container">
+                         <input type="password" id="conf_password" name="conf_password" placeholder=" ">
+                         <label for="conf_password" >Confrim Password:</label>
+                    </div>
+
+                    <div class="input-container">
+                         <input type="text" id="phone" name="phone" maxlength="12" placeholder=" " >
+                         <label for="phone" > Phone </label>
+                        </div>
+                </div>
+                <div class="col-2 " >
+                    <div class="input-container">
+                        <input id="Street" name="Street" type="text" placeholder=" "> 
+                        <label for="Street" >Street Address</label>
+                    </div>
+
+                    <div class="input-container">
+                        <input id="Address" name="Address"  type="text" placeholder=" ">
+                        <label for="Address" >Address Line 2</label>
+                    </div>
+
+                    <div class="input-container">
+                        <input id="City" name="City"  type="text" placeholder=" ">
+                        <label for="City" >City</label>
+                    </div>
+
+                    <div class="input-container">
+                        <input id="Region" name="Region"   type="text"  placeholder=" ">
+                        <label for="Region" >State / Province / Region</label>
+                    </div>
+
+                    <div class="input-container">
+                        <input id="Zip" name="Zip"  maxlength="15"  type="text"  placeholder=" ">
+                        <label for="Zip" >Postal / Zip Code</label>
+                    </div>
                         
                     
                 </div>
