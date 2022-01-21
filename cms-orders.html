@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CandyCrush </title>
+    <link rel="stylesheet" href="assets/imageSlider/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/articleProgresBar/css/style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-1">
+                    <div class="logo">
+                        <a href="#home"><img height="60px" src="imgs/logo2.png"></a>
+                    </div>
+                    <a class="mobile-menu-icon">
+                        <img height="60px"
+                            src="https://icon-library.com/images/menu-button-icon/menu-button-icon-7.jpg">
+                    </a>
+                    <nav id="menu">
+                        <ul class="main-menu">
+                            <li style="width: 150px;"> <a href="cms-view-products.html"> View products </a> </li>
+                            <li style="width: 150px;"> <a href="cms-add-product.html"> Add products </a> </li>
+                            <li style="width: 150px;"> <a href="cms-edit-product.html"> Edit products </a> </li>
+                            <li style="width: 150px;"> <a href="cms-orders.html"> View and delete customer orders. </a> </li>
+                            <li style="width: 150px;"> <a href="index.html"> logout </a> </li>
+                        </ul>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <section>
+
+        <div class="container " style="height: 55vh;">
+            <div class="row">
+                <div class="col-1 icon-content-wraper">
+                    <h2> delete/view orders</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <form>
+
+                        <div class="col-1 ">
+                            Delete order:
+                            <div class="input-container">
+                                <input type="text" id="order-id" name="order-id" placeholder=" ">
+                                <label for="order-id">Order id</label>
+                            </div>
+
+                        </div>
+
+                        <div class="col-1 mt-60">
+                            <input id="delete" class="btn-standard" type="submit" name="delete" value="delete-order" />
+                        </div>
+                        <div class=" col-1 mt-60">
+                            output:
+                        </div>
+                    </form>
+                </div>
+                <div class="col-2">
+                    All orders:
+                    <div class="input-container">
+                        <input type="text" id="temp" name="temp" placeholder=" ">
+                        <label for="temp">Order temp</label>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" id="temp" name="temp" placeholder=" ">
+                        <label for="temp">Order temp</label>
+                    </div>
+                    <div class="input-container">
+                        <input type="text" id="temp" name="temp" placeholder=" ">
+                        <label for="temp">Order temp</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <p>&copy; 2022 www.CandyCrush.com</p>
+                </div>
+                <div class="col-2 text-right">
+                    <p>Privacy policy</p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <div class="article-progress-bar"></div>
+
+    <script src="assets/articleProgresBar/java/script.js"></script>
+    <script src="js/mobile-nav.js"></script>
+    <script src="assets/imageSlider/java/script.js"></script>
+
+</body>
+
+</html>
