@@ -14,8 +14,6 @@
 //Include libraries
 require __DIR__ . '/vendor/autoload.php';
 
-$sortString = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_URL);
-    
 //Create instance of MongoDB client
 $mongoClient = (new MongoDB\Client);
 

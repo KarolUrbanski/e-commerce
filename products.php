@@ -49,8 +49,8 @@ foreach ($cursor as $prod){
 	}
 	
 	echo "
-	<div class='col-4'><a href='product_page.html'>
-	<div class='icon-wraper'><a href='product_page.html'>
+	<div class='col-4'><a href='product_page.php?id=".$prod['_id']."'>
+	<div class='icon-wraper'><a href='product_page.php?id=".$prod['_id']."'>
 	<img src='https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg'>
 	</div>
 	<div class='icon-content-wraper'>
