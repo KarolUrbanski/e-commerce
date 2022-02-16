@@ -193,6 +193,7 @@ header nav li {
     padding: 3px 6px 3px 6px;
     font-size: small;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 header .container {

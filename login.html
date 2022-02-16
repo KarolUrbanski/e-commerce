@@ -19,10 +19,14 @@
             <div class="row">
                 <div class="col-1">
                     <nav id="menu">
+                       
                         <ul class="main-menu" style="margin: -10px 0 5px; ">
+                        <div id="LoginPara">
                             <li class="register-login"> <a href="login.html"> Login </a> </li>
                             <li class="register-login"> <a href="register.html"> Register </a> </li>
+                        </div>
                         </ul>
+                        
 
                     </nav>
                 </div>
@@ -111,7 +115,7 @@
                 </div>
             </div>
             <div class="row icon-content-wraper">
-                <form action="index.html">
+                <form >
                     <div class="col-3 "><br></div>
                     <div class="col-3 ">
                         <div class="input-container">
@@ -128,9 +132,10 @@
                     </div>
                     <div class="col-3 "><br></div>
                     <div class="col-1 mt-60">
-                        <input id="Login" class="btn-standard" type="submit" name="Login" value="Login" />
+                        <button  onclick="login();" type="button" class="btn-standard" name="Login">Login</button>
                     </div>
                 </form>
+                <div id="response"></div>
             </div>
         </div>
 
@@ -174,7 +179,48 @@
 <!-- script for image slider to change image every 5s-->
 <script src="assets/imageSlider/java/script.js"></script>
 
+<!-- Script for checking if logged in-->
+<script src="JS/check-login.js"></script>
 
 </body>
 
 </html>
+<script>
+             let request = new XMLHttpRequest();
+            
+
+     function login(){
+
+        //Create event handler that specifies what should happen when server responds
+        request.onload = () => {
+            //Check HTTP status code
+            if(request.status === 200){
+                        //Get data from server
+                        var responseData = request.responseText;
+
+                        //Add data to page
+                        if(responseData === "ok"){
+                            document.getElementById("LoginPara").innerHTML = loggedInStr;
+                            document.getElementById("response").innerHTML = "";//Clear error messages
+                        }
+                        else
+                            document.getElementById("response").innerHTML = request.responseText;
+                    }
+                    else
+                        document.getElementById("response").innerHTML = "Error communicating with server";
+                };
+
+        //Extract registration data
+        let usrEmail = document.getElementById("email").value;
+        let usrPassword = document.getElementById("password").value;
+
+        request.open("POST", "login.php");
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        //Send request
+                request.send("email=" + usrEmail + "&password=" + usrPassword);
+    }
+
+
+
+</script>

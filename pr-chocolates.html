@@ -20,8 +20,10 @@
                 <div class="col-1">
                     <nav id="menu">
                         <ul class="main-menu" style="margin: -10px 0 5px; ">
+                            <div id="LoginPara">
                             <li class="register-login"> <a href="login.html"> Login </a> </li>
                             <li class="register-login"> <a href="register.html"> Register </a> </li>
+                            </div>
                         </ul>
 
                     </nav>
@@ -64,7 +66,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-1">
-                    <h2> Chocolates</h2>
+                    <h2> Sweet candies</h2>
                     <p> Lorem ipsum dolor sit amet, consectetur adipisci elit,<br> sed eiusmod tempor incidunt ut labore
                         et dolore magna aliqua. </p>
                 </div>
@@ -73,10 +75,12 @@
                 <div class="col-1 text-right">
                     <form action="#">
 
-                        <select class="sort" name="sort_list" id="sort_list">
-                            <option value="1">Latest Added
-                            <option value="2" selected="">Price High - Low
-                            <option value="2" selected="">Price Low - High
+                        <select class="sort" name="sort_list" id="sort_list" onchange="loadContent()">
+                            <option value="">Default
+                            <option value="N-a">Name : ascending</option>
+                            <option value="N-d">Name : descending</option>
+                            <option value="P-a" >Price High - Low
+                            <option value="P-d" >Price Low - High
                         </select>
                         <span style="padding: 5px; float: right; font-size: x-large;">Sort by:</span>
                     </form>
@@ -85,83 +89,10 @@
         </div>
         <div class="grey-bg">
             <div class="container">
-                <div class="row mt-60">
-                    <div class="col-3"><a href="product_page.html">
-                            <div class="icon-wraper"><a href="product_page.html">
-                                    <img src="https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg">
-                            </div>
-                            <div class="icon-content-wraper">
-                                <h3> Chocolate1 </h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
-                                    ut
-                                    labore et dolore magna aliqua.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-3"><a href="product_page.html">
-                            <div class="icon-wraper">
-                                <img src="https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg">
-                            </div>
-                            <div class="icon-content-wraper">
-                                <h3> Chocolate2</h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
-                                    ut
-                                    labore et dolore magna aliqua.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-3"><a href="product_page.html">
-                            <div class="icon-wraper">
-                                <img src="https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg">
-                            </div>
-                            <div class="icon-content-wraper">
-                                <h3> Chocolate3 </h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
-                                    ut
-                                    labore et dolore magna aliqua.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="row mt-60">
-                    <div class="col-3"><a href="product_page.html">
-                            <div class="icon-wraper">
-                                <img src="https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg">
-                            </div>
-                            <div class="icon-content-wraper">
-                                <h3> Chocolate4 </h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
-                                    ut
-                                    labore et dolore magna aliqua.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-3"><a href="product_page.html">
-                            <div class="icon-wraper">
-                                <img src="https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg">
-                            </div>
-                            <div class="icon-content-wraper">
-                                <h3> Chocolate5 </h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
-                                    ut
-                                    labore et dolore magna aliqua.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-3"><a href="product_page.html">
-                            <div class="icon-wraper">
-                                <img src="https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg">
-                            </div>
-                            <div class="icon-content-wraper">
-                                <h3> Chocolate6 </h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
-                                    ut
-                                    labore et dolore magna aliqua.</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
+                <div id="ServerContent">
+                    <p>Dinamicly loaded content goes here: 
+                    </p>
+                </div>   
             </div>
         </div>
 
@@ -193,7 +124,6 @@
         </div>
 
     </footer>
-
 <!-- progress bar + script to it-->
 <div class="article-progress-bar"></div>
 <script src="assets/articleProgresBar/java/script.js"></script>
@@ -204,7 +134,65 @@
 <!-- script for image slider to change image every 5s-->
 <script src="assets/imageSlider/java/script.js"></script>
 
+<!-- Script for checking if logged in-->
+<script src="JS/check-login.js"></script>
 
 </body>
 
 </html>
+<script>
+    //sorting database
+	function loadContent() {
+		let sort = document.getElementById('sort_list').value;
+		let request= new XMLHttpRequest();
+
+		request.onload = () => {
+			if (request.status === 200) {
+				let responseData = request.responseText;
+
+				document.getElementById('ServerContent').innerHTML = responseData;
+			}
+			else
+				alert("error communicating wiuth serwer: " + request.status)
+		};
+		if (sort=="N-a") {
+			request.open("GET","products.php?sort=Nasc&Category=Chocolate");
+		}
+		else if (sort=="N-d"){
+			request.open("GET","products.php?sort=Ndesc&Category=Chocolate");
+		
+		}
+		else if (sort=="P-a"){
+			request.open("GET","products.php?sort=Pasc&Category=Chocolate");
+		
+		}
+		else if (sort=="P-d"){
+			request.open("GET","products.php?sort=Pdesc&Category=Chocolate");
+		
+		}
+		else{
+				request.open("GET","products.php?Category=Chocolate");
+		}
+	
+
+		request.send();
+	}
+
+	//to show database with no need to press a button
+	window.onload = () =>{
+		let request= new XMLHttpRequest();
+
+		request.onload = () => {
+			if (request.status === 200) {
+				let responseData = request.responseText;
+
+				document.getElementById('ServerContent').innerHTML = responseData;
+			}
+			else
+				alert("error communicating wiuth serwer: " + request.status)
+		};
+
+		request.open("GET","products.php?Category=Chocolate");
+		request.send();
+	}
+</script>

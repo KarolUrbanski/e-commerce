@@ -20,8 +20,10 @@
                 <div class="col-1">
                     <nav id="menu">
                         <ul class="main-menu" style="margin: -10px 0 5px; ">
+                            <div id="LoginPara">
                             <li class="register-login"> <a href="login.html"> Login </a> </li>
-                            <li class="register-login"> <a href="register.html"> Register </a> </li>
+                       <li class="register-login"> <a href="register.html"> Register </a> </li>
+                            </div>
                         </ul>
 
                     </nav>
@@ -111,36 +113,41 @@
                 </div>
             </div>
             <div class="row icon-content-wraper">
-                <form action="index.html">
+               <form onsubmit="register(); return false">
+<!-- return false for form not to refresh website( it is in form for email validity) --> 
                     <div class="col-2 ">
                         <div class="input-container">
-                            <input type="text" id="text" name="text" placeholder=" ">
-                            <label for="text"> Name:</label>
+                            <input type="text" id="name" name="Name" placeholder=" " required>
+                            <label for="name"> First-Name:</label>
                         </div>
-
+                     <div class="input-container">
+                         <input type="text" id="last-name" name="last-name" placeholder=" " >
+                         <label for="last-name"> Last-name:</label>
+                    </div>
                         <div class="input-container">
-                            <input type="email" id="email" name="email" placeholder=" ">
+                            <input type="email" id="email" name="email" placeholder=" " required>
                             <label for="password">Email:</label>
                         </div>
 
                         <div class="input-container">
                             <input type="password" id="password" name="password" placeholder=" ">
                             <label for="password">Password:</label>
+                           
                         </div>
-
+                        <div id="response"></div>
                         <div class="input-container">
                             <input type="password" id="conf_password" name="conf_password" placeholder=" ">
                             <label for="conf_password">Confrim Password:</label>
                         </div>
 
                         <div class="input-container">
-                            <input type="text" id="phone" name="phone" maxlength="12" placeholder=" ">
+                            <input type="text" id="phone" name="phone" maxlength="12" placeholder=" " required>
                             <label for="phone"> Phone </label>
                         </div>
                     </div>
                     <div class="col-2 ">
                         <div class="input-container">
-                            <input id="Street" name="Street" type="text" placeholder=" ">
+                            <input id="Street" name="Street" type="text" placeholder=" " required>
                             <label for="Street">Street Address</label>
                         </div>
 
@@ -160,16 +167,19 @@
                         </div>
 
                         <div class="input-container">
-                            <input id="Zip" name="Zip" maxlength="15" type="text" placeholder=" ">
+                            <input id="Zip" name="Zip" maxlength="15" type="text" placeholder=" " required>
                             <label for="Zip">Postal / Zip Code</label>
                         </div>
 
 
                     </div>
+                   
                     <div class="col-1 mt-60">
-                        <input id="saveForm" class="btn-standard" type="submit" name="submit" value="Submit" />
+                   <button type="submit" id="saveForm" class="btn-standard" >Submint</button>
                     </div>
                 </form>
+                <div id="ServerResponse">
+                </div>
             </div>
         </div>
 
@@ -213,7 +223,91 @@
 <!-- script for image slider to change image every 5s-->
 <script src="assets/imageSlider/java/script.js"></script>
 
+<!-- Script for checking if logged in-->
+<script src="JS/check-login.js"></script>
 
 </body>
 
 </html>
+<script>
+    function register(){
+        if(checkPassw()){
+
+        
+        //Create request object 
+        let request = new XMLHttpRequest();
+
+        //Create event handler that specifies what should happen when server responds
+        request.onload = () => {
+            //Check HTTP status code
+            if(request.status === 200){
+                //Get data from server
+                let responseData = request.responseText;
+
+                //Add data to page
+                document.getElementById("ServerResponse").innerHTML = responseData;
+                toLogin();
+            }
+            else
+                alert("Error communicating with server: " + request.status);
+        };
+
+        //Set up request with HTTP method and URL 
+        request.open("POST", "registration.php");
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        
+        //Extract registration data
+        let usrName = document.getElementById("name").value;
+        let usrLastName = document.getElementById("last-name").value;
+        let usrEmail = document.getElementById("email").value;
+        let usrPassword = document.getElementById("password").value;
+        let usrPhone = document.getElementById("phone").value;
+        let usrAdr1 = document.getElementById("Street").value;
+        let usrAdr2 = document.getElementById("Address").value;
+        let usrAdr3 = document.getElementById("Region").value;
+        let usrAdr4 = document.getElementById("Zip").value;
+        let usrAdr5 = document.getElementById("City").value;
+
+        let usrAddress= usrAdr1+", " + usrAdr2+" "  + usrAdr3 + " " + usrAdr4 + " " 
+        + usrAdr5;
+
+        //Send request
+        request.send("name=" + usrName+ "&lastname=" + usrLastName + "&email=" + usrEmail + "&password=" + usrPassword
+        + "&phone=" + usrPhone + "&address=" + usrAddress );
+       
+    }
+}
+
+    //password validity
+    function checkPassw(){
+        let passwordInput=document.getElementById("password");
+        let confirmInput=document.getElementById("conf_password");
+        const regex=new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+
+        //checking regex
+    if(!regex.test(passwordInput.value)){
+       document.getElementById("response").innerHTML="<b>Wrong Password</b><br> (Password minimum length is 8, at least 1 uppercase and 1 number)";
+        return false;
+    }
+    else{
+        //checing if password maches passwordconf
+        if(passwordInput.value != confirmInput.value ){
+            document.getElementById("response").innerHTML="Password not matched";
+            return false;
+        }
+        else{
+            document.getElementById("response").innerHTML="";
+            return true;
+        }
+        
+        }
+
+    }
+
+    function toLogin(){
+        setTimeout(function() {
+                    window.location.replace("/e-commerce/login.html");
+                   }, 3000);
+                   document.querySelector('Form').style.display='none';
+    }
+</script>
