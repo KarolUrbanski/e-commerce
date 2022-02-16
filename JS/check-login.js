@@ -1,4 +1,4 @@
-let loggedInStr = "<li class='register-login'><a href='user.php'>Account</a></li><li class='register-login'><a onclick='logout()'>Logout</a></li>";
+let loggedInStr = "<li class='register-login'><a href='user.php'>Account</a></li><li class='register-login'><a href='index.html' onclick='logout()'>Logout</a></li>";
 let loginStr = document.getElementById("LoginPara").innerHTML;
 
 //Check login when page loads
@@ -16,6 +16,7 @@ function checkLogin(){
         else{
             console.log(request.responseText);
             document.getElementById("LoginPara").innerHTML  = loginStr;
+            
         }
     };
     //Set up and send request

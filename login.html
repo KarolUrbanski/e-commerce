@@ -201,7 +201,8 @@
                         //Add data to page
                         if(responseData === "ok"){
                             document.getElementById("LoginPara").innerHTML = loggedInStr;
-                            document.getElementById("response").innerHTML = "";//Clear error messages
+                            document.getElementById("response").innerHTML = "logged in successfully"
+                            toLogin();
                         }
                         else
                             document.getElementById("response").innerHTML = request.responseText;
@@ -221,6 +222,11 @@
                 request.send("email=" + usrEmail + "&password=" + usrPassword);
     }
 
-
+    function toLogin(){
+        setTimeout(function() {
+                    window.location.replace("/e-commerce/user.php");
+                   }, 1000);
+                   document.querySelector('Form').style.display='none';
+    }
 
 </script>

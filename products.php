@@ -13,28 +13,32 @@ $mongoClient = (new MongoDB\Client);
 $db = $mongoClient->EcommerceWeb;
 
 //Find all of the customers that match  this criteria
-if ($sortString == "Nasc") {
-	$filter  = ['Category' => $cattegoryString];
-	$options = ['sort' => ['Name' => 1]];
-
-}
-elseif  ($sortString == "Ndesc") {
-	$filter  = ['Category' => $cattegoryString];
-	$options = ['sort' => ['Name' => -1]];
-}
-elseif  ($sortString == "Pasc") {
-	$filter  = ['Category' => $cattegoryString];
-	$options = ['sort' => ['Price' => -1]];
-}
-elseif  ($sortString == "Pdesc") {
-	$filter  = ['Category' => $cattegoryString];
-	$options = ['sort' => ['Price' => 1]];
+if ($cattegoryString ==""){
+	
+	$filter  = [];
 }
 else{
 	$filter  = ['Category' => $cattegoryString];
+}
+
+if ($sortString == "Nasc") {
+	$options = ['sort' => ['Name' => 1]];
+}
+elseif  ($sortString == "Ndesc") {
+	$options = ['sort' => ['Name' => -1]];
+}
+elseif  ($sortString == "Pasc") {
+	$options = ['sort' => ['Price' => -1]];
+}
+elseif  ($sortString == "Pdesc") {
+	$options = ['sort' => ['Price' => 1]];
+}
+else{
 $options = [];
 }
 $cursor = $db->All_Products_Store->find($filter, $options);
+
+
 
 //Output the results
 echo "<h1>Results</h1>";
@@ -43,6 +47,7 @@ foreach ($cursor as $prod){
 	if($x %4 == 0){
 		echo "<div class='row mt-60'>";
 	}
+	
 	echo "
 	<div class='col-4'><a href='product_page.html'>
 	<div class='icon-wraper'><a href='product_page.html'>

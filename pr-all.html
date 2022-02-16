@@ -156,18 +156,18 @@
 				alert("error communicating wiuth serwer: " + request.status)
 		};
 		if (sort=="N-a") {
-			request.open("GET","products.php?sort=Nasc");
+			request.open("GET","products.php?sort=Nasc&Category=");
 		}
 		else if (sort=="N-d"){
-			request.open("GET","products.php?sort=Ndesc");
+			request.open("GET","products.php?sort=Ndesc&Category=");
 		
 		}
 		else if (sort=="P-a"){
-			request.open("GET","products.php?sort=Pasc");
+			request.open("GET","products.php?sort=Pasc&Category=");
 		
 		}
 		else if (sort=="P-d"){
-			request.open("GET","products.php?sort=Pdesc");
+			request.open("GET","products.php?sort=Pdesc&Category=");
 		
 		}
 		else{
@@ -192,7 +192,7 @@
 				alert("error communicating wiuth serwer: " + request.status)
 		};
 
-		request.open("GET","products.php");
+		request.open("GET","products.php?Category=");
 		request.send();
 	}
 </script>
