@@ -110,7 +110,7 @@
             style="height: 55vh; background-color: rgba(0, 0, 0, 0.05); border-radius: 1%; margin-top: 30px;">
             <div class="row ">
                 <div class="col-1 icon-content-wraper">
-                    <div id="server">x</div>
+                    <div id="server">Loading...</div>
                 </div>
             </div>
         </div>
@@ -202,8 +202,8 @@ function loadBasket(){
     htmlStr += "<input type='hidden' name='prodIDs' value='" + JSON.stringify(prodIDs) + "'>";
     
     //Add checkout and empty basket buttons
-    htmlStr += "<input type='submit' value='Checkout'></form>";
-    htmlStr += "<br><button onclick='emptyBasket()'>Empty Basket</button>";
+    htmlStr += "<br><button type='submit' value='Checkout' class='btn-standard'>Checkout</button></form>";
+    htmlStr += "<br><button onclick='emptyBasket()' class='btn-standard'>Empty Basket</button>";
 }
     //Display nubmer of products in basket
     document.getElementById("server").innerHTML = htmlStr;

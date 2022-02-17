@@ -14,6 +14,12 @@ $prodIDs= $_POST['prodIDs'];
 session_start();   
 $email=$_SESSION['loggedInUser'];
 
+//if user is not logged in send him to login page
+if(!array_key_exists("loggedInUser", $_SESSION) ){
+    header("Location: login.html"); 
+    exit();
+}
+
 //Convert JSON string to PHP array 
 $productArray = json_decode($prodIDs, true);
 

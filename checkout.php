@@ -20,7 +20,11 @@ $mongoClient = (new MongoDB\Client);
 
 //Select a database
 $db = $mongoClient->EcommerceWeb;
-session_start();   
+session_start(); 
+//if user is not logged in send him to login page
+if(!array_key_exists("loggedInUser", $_SESSION) ){
+    header("Location: login.html"); 
+}
 $email=$_SESSION['loggedInUser']
 ?>
 <body>

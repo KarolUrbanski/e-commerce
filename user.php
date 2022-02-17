@@ -20,6 +20,11 @@ $mongoClient = (new MongoDB\Client);
 //Select a database
 $db = $mongoClient->EcommerceWeb;
 session_start();   
+//if user is not logged in send him to login page
+if(!array_key_exists("loggedInUser", $_SESSION) ){
+    header("Location: login.html"); 
+    exit();
+}
 $email=$_SESSION['loggedInUser']
 ?>
 
@@ -85,7 +90,7 @@ $email=$_SESSION['loggedInUser']
             </div>
             <div class="row icon-content-wraper">
                 <div class="col-3 ">
-                    <h4>Account details:</h4>
+                    <h1>Account details:</h1>
                     <div class="details">
                     <?php
 
@@ -110,22 +115,22 @@ $email=$_SESSION['loggedInUser']
                 </div>
                 <div class="col-3 ">
 
-                    Past orders:
+                    <h1>Past orders:<h1>
                     <div id="orders">
                     <?php
 
                     //Find all of the orders that match  this criteria
-                	$options = ['email' => $email];
+                	$options = ['Customer-details.email' => $email];
 
                     $cursor = $db->Orders->find($options);
 
                     //Output the results
-                    echo "<h1>Results</h1>";
                 foreach ($cursor as $cust){
                     echo "<p>";
-                    echo "Customer name: " . $cust['name'];
-                    echo " Email: ". $cust['email'];
-                    echo "</p>";
+                    echo "Order id: " . $cust['_id'];
+                    echo "<br> Date: ". $cust['Date'];
+                    echo "<br>Order Price: ". $cust['TotalPrice'];
+                    echo "<hr></p>";
                 }
 
 
@@ -135,7 +140,7 @@ $email=$_SESSION['loggedInUser']
 
                 </div>
                 <div class="col-3 ">
-                    Edit your details
+                    <h1>Edit your details</h1>
                     <form action="change_details.php" method="post">
                     <div class="input-container">
                         <input id="Street" name="Street" type="text" placeholder=" " required>
