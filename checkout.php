@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,18 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="assets/articleProgresBar/css/style.css">
 </head>
+<?php
+//Include libraries
+require __DIR__ . '/vendor/autoload.php';
 
+//Create instance of MongoDB client
+$mongoClient = (new MongoDB\Client);
+
+//Select a database
+$db = $mongoClient->EcommerceWeb;
+session_start();   
+$email=$_SESSION['loggedInUser']
+?>
 <body>
 
     <header>
@@ -19,14 +31,12 @@
             <div class="row">
                 <div class="col-1">
                     <nav id="menu-top">
-                       
                         <ul class="main-menu" style="margin: -10px 0 5px; ">
-                        <div id="LoginPara">
+                            <div id="LoginPara">
                             <li class="register-login"> <a href="login.html"> Login </a> </li>
                             <li class="register-login"> <a href="register.html"> Register </a> </li>
-                        </div>
+                            </div>
                         </ul>
-                        
 
                     </nav>
                 </div>
@@ -45,7 +55,7 @@
                             <li> <a href="index.html"> Home </a> </li>
                             <li> <a href="index.html#best_sellers"> Best sellers </a> </li>
                             <li> <a href="products-cattegories.html"> All products </a> </li>
-                            <li> <a href="basket.html"> Basket </a> </li>
+                            <li> <a href="#see_also"> Basket </a> </li>
                             <li> <a href="index.html#about_us"> About us </a> </li>
                         </ul>
 
@@ -108,34 +118,84 @@
 
     <section>
 
-        <div class="container " style="height: 55vh;">
-            <div class="row">
-                <div class="col-1 icon-content-wraper">
-                    <h2> Login </h2>
-                </div>
-            </div>
-            <div class="row icon-content-wraper">
-                <form >
-                    <div class="col-3 "><br></div>
+        <div class="container "
+            style="height: 55vh; background-color: rgba(0, 0, 0, 0.05); border-radius: 1%; margin-top: 30px;">
+            <div class="row ">
+
+                    <div id="server">
                     <div class="col-3 ">
-                        <div class="input-container">
-                            <input type="email" id="email" name="email" placeholder=" ">
-                            <label for="password">Email:</label>
-                        </div>
+                    <h1>Shipping Address:</h1>
+                    <div class="details">
+                    <?php
 
-                        <div class="input-container">
-                            <input type="password" id="password" name="password" placeholder=" ">
-                            <label for="password">Password:</label>
-                        </div>
-                        <p class="text-right" style="font-size: small;"><a href="register.html">CREATE ACCOUNT</a></p>
+                    //Find all of the customers that match  this criteria
+                	$options = ['email' => $email];
+
+                    $cursor = $db->Customers_Data->findOne($options);
+
+                    //Output the results
+                    echo "<p>";
+                    echo "First name: " . $cursor['first-name'];
+                    echo "<br>Last name: " . $cursor['last-name'];
+                    echo "<br>Email: " . $cursor['email'];
+                    echo "<br>Phone number: " . $cursor['phone-number'];
+                    echo "<br>Address: ". $cursor['address'];
+                    echo "</p>";
+
+
+                    ?>
+                    </div>
+                <div class="col-1 mt-60">
+                <form action="user.php">
+                 <button type="submit"  class="btn-standard" >Change details</button>
+                 </form>
+                </div>
+
+                </div>
+                <div class="col-3 ">
+                    <?php
+
+//Extract the product IDs that were sent to the server
+$prodIDs= $_POST['prodIDs'];
+
+//Convert JSON string to PHP array 
+$productArray = json_decode($prodIDs, true);
+
+//Output the IDs of the products that the customer has ordered
+echo '<h1>Products Orderd</h1>';
+$totalPrice=0;
+for($i=0; $i<count($productArray); $i++){
+    $options = ['_id' => new MongoDB\BSON\ObjectID($productArray[$i]['id'])];
+    $cursor = $db->All_Products_Store->findOne($options);
+    echo "<p>";
+    echo $cursor['Name']." - Quantity: ".$productArray[$i]['count']." <br> Price: ".$productArray[$i]['count']*$cursor['Price']."<br>";
+    $totalPrice=$totalPrice+($cursor['Price']*$productArray[$i]['count']);
+    echo "</p>";
+}
+
+?>
+                </div>
+                <div class="col-3 ">
+                <?php
+
+
+
+//Output the results
+echo "<p>";
+echo "<h1>Total Price: " . $totalPrice;
+echo "</h1></p>";
+
+
+?>
+                <div class="col-1 mt-60">
+                <form action="user.php">
+                 <button type="submit"  class="btn-standard" >Order</button>
+                 </form>
+                </div>
+                </div>
 
                     </div>
-                    <div class="col-3 "><br></div>
-                    <div class="col-1 mt-60">
-                        <button  onclick="login();" type="button" class="btn-standard" name="Login">Login</button>
-                    </div>
-                </form>
-                <div id="response"></div>
+
             </div>
         </div>
 
@@ -186,47 +246,6 @@
 
 </html>
 <script>
-             let request = new XMLHttpRequest();
-            
 
-     function login(){
-
-        //Create event handler that specifies what should happen when server responds
-        request.onload = () => {
-            //Check HTTP status code
-            if(request.status === 200){
-                        //Get data from server
-                        var responseData = request.responseText;
-
-                        //Add data to page
-                        if(responseData === "ok"){
-                            document.getElementById("LoginPara").innerHTML = loggedInStr;
-                            document.getElementById("response").innerHTML = "logged in successfully"
-                            toLogin();
-                        }
-                        else
-                            document.getElementById("response").innerHTML = request.responseText;
-                    }
-                    else
-                        document.getElementById("response").innerHTML = "Error communicating with server";
-                };
-
-        //Extract registration data
-        let usrEmail = document.getElementById("email").value;
-        let usrPassword = document.getElementById("password").value;
-
-        request.open("POST", "login.php");
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-        //Send request
-                request.send("email=" + usrEmail + "&password=" + usrPassword);
-    }
-
-    function toLogin(){
-        setTimeout(function() {
-                    window.location.replace("/e-commerce/user.php");
-                   }, 1000);
-                   document.querySelector('Form').style.display='none';
-    }
 
 </script>

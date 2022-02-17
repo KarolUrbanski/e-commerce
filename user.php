@@ -136,11 +136,7 @@ $email=$_SESSION['loggedInUser']
                 </div>
                 <div class="col-3 ">
                     Edit your details
-                    <form onsubmit="register(); return false">
-                    <div class="input-container">
-                        <input type="password" id="password" name="password" placeholder=" ">
-                        <label for="password">Your Password:</label>
-                    </div>
+                    <form action="change_details.php" method="post">
                     <div class="input-container">
                         <input id="Street" name="Street" type="text" placeholder=" " required>
                         <label for="Street">Street Address</label>
@@ -152,12 +148,12 @@ $email=$_SESSION['loggedInUser']
                     </div>
 
                     <div class="input-container">
-                        <input id="City" name="City" type="text" placeholder=" ">
+                        <input id="City" name="City" type="text" placeholder=" " required>
                         <label for="City">City</label>
                     </div>
 
                     <div class="input-container">
-                        <input id="Region" name="Region" type="text" placeholder=" ">
+                        <input id="Region" name="Region" type="text" placeholder=" " required>
                         <label for="Region">State / Province / Region</label>
                     </div>
 
@@ -165,6 +161,9 @@ $email=$_SESSION['loggedInUser']
                         <input id="Zip" name="Zip" maxlength="15" type="text" placeholder=" " required>
                         <label for="Zip">Postal / Zip Code</label>
                     </div>
+                    <?php
+                        echo" <input type='hidden' name='email' value=".$email.">";
+                    ?>
 
 
                          <div class="col-1 mt-60">

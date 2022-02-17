@@ -49,7 +49,13 @@ foreach ($cursor as $prod){
 	}
 	
 	echo "
-	<div class='col-4'><a href='product_page.php?id=".$prod['_id']."'>
+	<div class='col-4' style='text-align: center;
+	padding: 5px;
+	background-image: linear-gradient(to bottom, rgba(150, 0, 50, 0.2) 0%, rgba(150, 0, 50, 0.2) 100%), linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%);
+	background-clip: content-box, padding-box;
+    border-radius: 15px;
+    height: 460px;'>
+	<a href='product_page.php?id=".$prod['_id']."'>
 	<div class='icon-wraper'><a href='product_page.php?id=".$prod['_id']."'>
 	<img src='https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg'>
 	</div>
@@ -62,8 +68,12 @@ foreach ($cursor as $prod){
    echo $prod['Description'];
    echo "<br>Price: ";
    echo $prod['Price']."£";
+   echo "<br>";
    echo "</p>";
-   echo "</div> </a> </div>";
+   echo "</div> </a>";
+   echo "<button onclick=\"addToBasket('". $prod['_id']."','". $prod['Name']."')\"";
+   echo "class='btn-standard'>To basket</button>";
+   echo " </div>";
    if($x %4 == 3){
 	echo "</div>";
 	}

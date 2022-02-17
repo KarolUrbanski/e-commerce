@@ -434,6 +434,7 @@ nav li:hover {
     margin: 0 auto;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.7);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.7);
+    margin-top: 5px;
 }
 
 .icon-wraper-square {
@@ -511,7 +512,7 @@ footer p {
         float: right;
     }
     #menu-top{
-        margin-top: 450px;
+        margin-top: 440px;
         z-index: 1;
     }
 

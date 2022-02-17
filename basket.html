@@ -18,7 +18,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-1">
-                    <nav id="menu">
+                    <nav id="menu-top">
                         <ul class="main-menu" style="margin: -10px 0 5px; ">
                             <div id="LoginPara">
                             <li class="register-login"> <a href="login.html"> Login </a> </li>
@@ -215,16 +215,16 @@ function appended(basket){
         //then deletes the dublicates
     for(let i=0; i<basket.length; ++i){
         if(basket[i]==null){
-            i++;
+            console.log("skip");
         }
         else{
 
         for(let j=0; j<basket.length; ++j){
             if(basket[j]==null){
-            j++;
+                console.log("skip");
               }
             else{
-              if(i > j ){
+              if(i != j ){
                  if(JSON.stringify(basket[i].id)===JSON.stringify(basket[j].id)){
                  basket[i].quantity=Number(basket[j].quantity)+Number(basket[i].quantity);
                  delete basket[j];
