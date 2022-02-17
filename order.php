@@ -35,17 +35,20 @@ $order["Customer-details"]=[
     "phone-number" => $customer["phone-number"],
      "address" => $customer["address"]
 ];
-$order["Date"]=date('l jS \of F Y h:i:s A');
+$itemCount=0;
+$CartItems=[];
 for($i=0; $i<count($productArray); $i++){
     $options = ['_id' => new MongoDB\BSON\ObjectID($productArray[$i]['id'])];
     $cursor = $db->All_Products_Store->findOne($options);
-    $order["item-".$i]=["CartItem" => $cursor,
-    "Quantity" => $productArray[$i]['count']];
+    $cursor["Quantity"]=$productArray[$i]['count'];
+    array_push($CartItems,$cursor);
     $totalPrice=$totalPrice+($cursor['Price']*$productArray[$i]['count']);
-
+    $itemCount++;
 }
+$order["CartItems"]=$CartItems;
+$order["ProductTypes"]=$itemCount;
 $order["TotalPrice"]=$totalPrice;
-
+$order["Date"]=date('l jS \of F Y h:i:s A');
     $returnVal = $db->Orders->insertOne($order);
 
 //Echo result back to user
