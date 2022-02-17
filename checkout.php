@@ -188,8 +188,11 @@ echo "</h1></p>";
 
 ?>
                 <div class="col-1 mt-60">
-                <form action="user.php">
-                 <button type="submit"  class="btn-standard" >Order</button>
+                <form action="order.php" method='post'>
+                    <?php
+                    echo "<input type='hidden' name='prodIDs' value='" .$prodIDs."'>";
+                    ?>
+                 <button type="submit" onclick="emptyBasket()" class="btn-standard" >Order</button>
                  </form>
                 </div>
                 </div>
@@ -246,6 +249,8 @@ echo "</h1></p>";
 
 </html>
 <script>
-
+function emptyBasket(){
+    sessionStorage.clear();
+}
 
 </script>

@@ -191,15 +191,23 @@ function loadBasket(){
         prodIDs.push({id: basket[i].id, count: basket[i].quantity});//Add to product array
         }
     }
+    //check if basket is empty
+    if(basket.length < 1 ){
+        htmlStr += "Empty Basket :( <br>";
+    }
+    else{
+
+
     //Add hidden field to form that contains stringified version of product ids.
     htmlStr += "<input type='hidden' name='prodIDs' value='" + JSON.stringify(prodIDs) + "'>";
     
     //Add checkout and empty basket buttons
     htmlStr += "<input type='submit' value='Checkout'></form>";
     htmlStr += "<br><button onclick='emptyBasket()'>Empty Basket</button>";
-    
+}
     //Display nubmer of products in basket
     document.getElementById("server").innerHTML = htmlStr;
+    
 }
 
 function readBasket(){
