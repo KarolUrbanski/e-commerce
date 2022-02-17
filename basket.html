@@ -110,7 +110,7 @@
             style="height: 55vh; background-color: rgba(0, 0, 0, 0.05); border-radius: 1%; margin-top: 30px;">
             <div class="row ">
                 <div class="col-1 icon-content-wraper">
-                    <p>Empty basket :( </p>
+                    <div id="server">x</div>
                 </div>
             </div>
         </div>
@@ -161,3 +161,86 @@
 </body>
 
 </html>
+<script>
+
+window.onload= () =>{
+    readBasket();
+}
+function getBasket(){
+    let basket;
+    if(sessionStorage.basket === undefined || sessionStorage.basket === ""){
+        basket = [];
+    }
+    else {
+        basket = JSON.parse(sessionStorage.basket);
+    }
+    return basket;
+}
+function loadBasket(){
+    let basket = getBasket();//Load or create basket
+    //Build string with basket HTML
+    let htmlStr = "<form action='checkout.php' method='post'>";
+    let prodIDs = [];
+    for(let i=0; i<basket.length; i++){
+        if(basket[i]==null){
+        console.log("2");
+        }
+        else{
+        htmlStr += "Product name: " + basket[i].name + " <br>";
+        htmlStr += "Quantity: " + basket[i].quantity + "<br>";
+        prodIDs.push({id: basket[i].id, count: 1});//Add to product array
+        }
+    }
+    //Add hidden field to form that contains stringified version of product ids.
+    htmlStr += "<input type='hidden' name='prodIDs' value='" + JSON.stringify(prodIDs) + "'>";
+    
+    //Add checkout and empty basket buttons
+    htmlStr += "<input type='submit' value='Checkout'></form>";
+    htmlStr += "<br><button onclick='emptyBasket()'>Empty Basket</button>";
+    
+    //Display nubmer of products in basket
+    document.getElementById("server").innerHTML = htmlStr;
+}
+
+function readBasket(){
+    let basket = getBasket();//Load or create basket
+    basket=appended(basket);
+    sessionStorage.basket = JSON.stringify(basket);
+    loadBasket(); 
+}
+
+
+function appended(basket){
+        //check if there is a dublicate and appends the quantity
+        //then deletes the dublicates
+    for(let i=0; i<basket.length; ++i){
+        if(basket[i]==null){
+            i++;
+        }
+        else{
+
+        for(let j=0; j<basket.length; ++j){
+            if(basket[j]==null){
+            j++;
+              }
+            else{
+              if(i > j ){
+                 if(JSON.stringify(basket[i].id)===JSON.stringify(basket[j].id)){
+                 basket[i].quantity=Number(basket[j].quantity)+Number(basket[i].quantity);
+                 delete basket[j];
+              }
+            }
+
+          }
+      }
+     }
+    }
+    return basket;
+}
+
+//Deletes all products from basket
+function emptyBasket(){
+    sessionStorage.clear();
+    loadBasket();
+}
+</script>
