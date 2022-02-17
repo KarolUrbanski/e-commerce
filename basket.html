@@ -183,12 +183,12 @@ function loadBasket(){
     let prodIDs = [];
     for(let i=0; i<basket.length; i++){
         if(basket[i]==null){
-        console.log("2");
+        console.log("skip");
         }
         else{
         htmlStr += "Product name: " + basket[i].name + " <br>";
         htmlStr += "Quantity: " + basket[i].quantity + "<br>";
-        prodIDs.push({id: basket[i].id, count: 1});//Add to product array
+        prodIDs.push({id: basket[i].id, count: basket[i].quantity});//Add to product array
         }
     }
     //Add hidden field to form that contains stringified version of product ids.
@@ -204,14 +204,14 @@ function loadBasket(){
 
 function readBasket(){
     let basket = getBasket();//Load or create basket
-    basket=appended(basket);
+    basket=appended(basket);//appends quantity of the same products
     sessionStorage.basket = JSON.stringify(basket);
     loadBasket(); 
 }
 
 
 function appended(basket){
-        //check if there is a dublicate and appends the quantity
+        //check if there are  dublicates and appends them
         //then deletes the dublicates
     for(let i=0; i<basket.length; ++i){
         if(basket[i]==null){
