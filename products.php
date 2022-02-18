@@ -43,6 +43,7 @@ $cursor = $db->All_Products_Store->find($filter, $options);
 //Output the results
 $x=0;
 foreach ($cursor as $prod){
+	$stock=$prod['Tag']['StockAmount'];
 	if($x %4 == 0){
 		echo "<div class='row mt-60'>";
 	}
@@ -71,7 +72,7 @@ foreach ($cursor as $prod){
    echo "</p>";
    echo "</div> </a>";
    //check for stock amount
-   if($prod['Tag']['StockAmount']<1){
+   if($stock<1){
     echo "<button class='btn-standard'>Out of stock</button>";
 }
 else{
