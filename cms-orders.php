@@ -66,12 +66,12 @@ $returnAll = $collection->find();
             </div>
             <div class="row">
                 <div class="col-2">
-                    <form id="form" action="delete_order.php" method="post">
+                    <form id="form" action="cms-delete_order.php" method="post">
 
                         <div class="col-1 ">
                             Delete order:
                             <div class="input-container">
-                                <input type="text" id="order_id" name="order_id" placeholder=" ">
+                                <input type="text" id="order_id" name="order_id" placeholder=" " required>
                                 <label for="order-id">Order id</label>
                             </div>
 
@@ -89,16 +89,16 @@ $returnAll = $collection->find();
                     <h2>All Orders</h2>
                 <table id="orders">
                     <tr>
-                       
+                       <!-- Table header to show orders-->
                         <th>Order ID</th>
                         <th>Order Status</th>
                         <th>Customer Email</th>
-                        <th>Order Purchase Date</th>
+                        <th>Order Date</th>
                         <th>Order Total Price</th>
-                        <th>Order Vat</th>
+                        
                         
                     </tr>
-                   
+                   <!-- Table contents to show orders information-->
                     <?php
                         foreach ( $returnAll as $id => $value )
                         {
@@ -108,7 +108,6 @@ $returnAll = $collection->find();
                          echo "<td>". $value['CustomerInfo']['email']."</td>";
                          echo "<td>". $value['PurchaseDate']."</td>";
                          echo "<td>". $value['TotalPrice']."</td>";
-                         echo "<td>". $value['VAT']."</td>";
                          echo "</tr>";
                         }
                     ?>
@@ -138,15 +137,19 @@ $returnAll = $collection->find();
 
     <div class="article-progress-bar"></div>
     <script>
-        $("#logout").click(function(e){
+
+  //This is l=the logout function That will redirect the user to the login page and clear the session storage. 
+ $("#logout").click(function(e){
         window.location="cms-login.html";
+        sessionStorage.clear();
     });
+    //This function send the order id to using POST method to delete_order.php to access the database and delete the order if exist and if so it will remove the order from the HMTL table
     $("#form").submit(function(e){
      e.preventDefault();
     $.ajax({
         method: 'POST',
         type: "POST",
-        url: "delete_order.php",
+        url: "cms-delete_order.php",
          data:{
             order: $("#order_id").val()
             },
@@ -154,12 +157,13 @@ $returnAll = $collection->find();
         success: function(response){
             if (response==1){
                 var id=$("#order_id").val();
-                $('#'+id+'').remove();
-                $('#output').val("Order Deleted")
+                $('#'+id).remove();
+                $('#output').text("Order Deleted");
             }
-            else if(response==0){
-                $('#output').val("Can't Delete Order")
+            else {
+                $('#output').text("Can't Delete Order");
             }
+            
         } 
         
     

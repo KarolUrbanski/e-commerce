@@ -46,12 +46,12 @@
                     <div class="col-3 "><br></div>
                     <div class="col-3 ">
                         <div class="input-container">
-                            <input type="text" id="email" name="email" placeholder=" ">
+                            <input type="text" id="email" name="email" placeholder=" " required>
                             <label for="email">Login:</label>
                         </div>
 
                         <div class="input-container">
-                            <input type="password" id="password" name="password" placeholder=" ">
+                            <input type="password" id="password" name="password" placeholder=" " required>
                             <label for="password">Password:</label>
                         </div>
 
@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-1">
                     <div id="feedback">
-                        <p>Dynamically loaded content goes here</p>
+                        <p></p>
                     </div>
                 </div>
                 </form>
@@ -93,7 +93,9 @@
 
     <div class="article-progress-bar"></div>
     <script>
-            
+        /*
+            <!--This function use POST method to send the data to cms-login.php where it search for if the data 
+            exist to print an approprate massgae and redirect the user to cms-view-products.php and if so it also write the email and the password to the session storage*/
         $(document).ready(function(){
             $("#form").submit(function(e){
                 

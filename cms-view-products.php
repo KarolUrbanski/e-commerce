@@ -9,7 +9,7 @@ $db = $mongoClient->EcommerceWeb;
 
 //Select a collection 
 $collection = $db->All_Products_Store;
-$returnAll = $collection->find();
+$products = $collection->find();
 
 ?>
 <!DOCTYPE html>
@@ -65,7 +65,7 @@ $returnAll = $collection->find();
             </div>
             <div class="row">
                 <div class="col-2">
-                    <form id="form" action="search_product.php" method="post">
+                    <form id="form" action="cms-search_product.php" method="post">
 
                         <div class="col-1 ">
                             Search product:
@@ -84,6 +84,7 @@ $returnAll = $collection->find();
                 </div>
                 <div class="col-1">
                 <h2>All Products</h2>
+                <!-- These are all the header for the products table-->
                 <table id="products">
                     <tr>
                         <th>Product Image</th>
@@ -98,9 +99,10 @@ $returnAll = $collection->find();
                         <th>Product Discription</th>
                     </tr>
                    
+                    <!-- These are the products information called from the database and formated in a table-->
                     <?php
                     error_reporting(0);
-                        foreach ( $returnAll as $id => $value )
+                        foreach ( $products as $id => $value )
                         {
                         echo "<tr>";
                         echo "<td><img src='imgs/". $value['Tag']['ImgUrl']."' width='100' height='100'></img></td>";
@@ -145,23 +147,29 @@ $returnAll = $collection->find();
 
     <div class="article-progress-bar"></div>
 <script>
+
     let store=document.getElementById('products').innerHTML;
+
+    //This is l=the logout function That will redirect the user to the login page and clear the session storage. 
     $("#logout").click(function(e){
         window.location="cms-login.html";
+        sessionStorage.clear();
     });
+
+    //This is the search function that will use the post method to send the data to php file called search_product.php
     $("#form").submit(function(e){
      e.preventDefault();
     $.ajax({
         method: 'POST',
         type: "POST",
-        url: "search_product.php",
+        url: "cms-search_product.php",
          data:{
             ProductName: $("#product_name").val()
             },
         dataType:'json',
         success: function(data){
             if (data){
-
+//this function append the result found in the database to the table and remove all previous data in the table
                 $('td').remove();
                $("#products").append("<tr><td><img src='imgs/" 
                + data['Tag']['ImgUrl'] + "' width='100' height='100'></img></td><td>"
@@ -178,6 +186,7 @@ $returnAll = $collection->find();
           
                 
             }
+            //alert the user if no data found bu the search function  
             else{
                alert("Can't Find Data");
                 document.getElementById('products').innerHTML=store;

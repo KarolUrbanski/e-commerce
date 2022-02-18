@@ -67,7 +67,7 @@ $returnAll = $collection->find();
             </div>
             <div class="row">
                 <div class="col-1">
-                    <form id="form" action="update_product.php" method="POST">
+                    <form id="form" action="cms-update_product.php" method="POST">
 
                         <div class="col-1 ">
                             product ID to edit:
@@ -156,19 +156,24 @@ $returnAll = $collection->find();
 
 <div class="article-progress-bar"></div>
 <script type="text/javascript" >
+//This function load the image to the filed down the upload image button and  output the path to the image
 function loadFile() {
 var imgpath = $('#img').val();
 var path = imgpath.replace("C:\\fakepath\\", "");
 $('#outputimg').attr("src",'imgs/'+path);
 };
-          $("#logout").click(function(e){
+
+//This is l=the logout function That will redirect the user to the login page and clear the session storage. 
+ $("#logout").click(function(e){
         window.location="cms-login.html";
+        sessionStorage.clear();
     });
+//after selecting  product from the drop down list this function submit the ID value to php file get_product.php which will process this ID to update the form with the product information of the selected ID
         $("#productId").change(function(){
             var selected = $('#productId').val();
             $.ajax({
             method:"POST",
-             url: "get_product.php",
+             url: "cms-get_product.php",
              type: 'POST',
              data:{
                  selected:selected
@@ -195,7 +200,7 @@ $('#outputimg').attr("src",'imgs/'+path);
         
         })
  
- //
+ //this function submit the data to php file update_product.php which will process this data to update the collection with the new product information of the selected ID
  $("#form").submit(function(e){
      e.preventDefault();
     // alert($("#discount").val());
@@ -206,7 +211,7 @@ $('#outputimg').attr("src",'imgs/'+path);
     $.ajax({
         method: 'POST',
         type: "POST",
-        url: "update_product.php",
+        url: "cms-update_product.php",
         dataType:'json',
         data:{
             ID:$('#productId').val(),

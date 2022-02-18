@@ -51,9 +51,9 @@
             </div>
             <div class="row">
                 <div class="col-1">
-        <form id="form" action="add_product.php" method="post" enctype="multipart/form-data">
+        <form id="form" action="cms-add_product.php" method="post">
             <div class="col-1 ">
-                Choose Image
+                Choose Image:
                 
                 <div class="input-container">
                   <input type="file" id="img" name="img" accept="image/*" onchange="loadFile()" required>
@@ -133,24 +133,30 @@
 
 <div class="article-progress-bar"></div>
 <script type="text/javascript" >
-    //console.log($('#img').val());
+
+//This function load the image to the filed down the upload image button and  output the path to the image   
 function loadFile() {
 var imgpath = $('#img').val();
 var path = imgpath.replace("C:\\fakepath\\", "");
 $('#outputimg').attr("src",'imgs/'+path);
 };
-$("#logout").click(function(e){
-window.location="cms-login.html";
+
+//This is l=the logout function That will redirect the user to the login page and clear the session storage. 
+ $("#logout").click(function(e){
+        window.location="cms-login.html";
+        sessionStorage.clear();
     });
+
+//After filling all informqation in the input field this function submit the form data to php file add_product.php which will process this data to update the database 
 $("#form").submit(function(e){
 var imgpath = $('#img').val();
 var path = imgpath.replace("C:\\fakepath\\", "");
-//alert(path);
+
      e.preventDefault();
     $.ajax({
         method: 'POST',
         type: "POST",
-        url: "add_product.php",
+        url: "cms-add_product.php",
         dataType:'json',
 
         data:{
@@ -167,6 +173,7 @@ var path = imgpath.replace("C:\\fakepath\\", "");
             
         success: function(response){
             if (response == 1){
+                //alert the user when the prccess is done successfully 
                 alert("Product Added Successfully");
                 window.location="cms-view-products.php";
                 
