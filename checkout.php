@@ -175,6 +175,8 @@ for($i=0; $i<count($productArray); $i++){
     echo $cursor['Name']." - Quantity: ".$productArray[$i]['count']." <br> Price: ".$productArray[$i]['count']*$cursor['Price']."<br>";
     $totalPrice=$totalPrice+($cursor['Price']*$productArray[$i]['count']);
     echo "</p>";
+
+    
 }
 
 ?>

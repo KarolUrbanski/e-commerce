@@ -60,6 +60,16 @@ for($i=0; $i<count($productArray); $i++){
     array_push($CartItems,$cursor);
     //calculate total price
     $totalPrice=$totalPrice+($cursor['Price']*$productArray[$i]['count']);
+
+    //change item stock by product oreder quantity
+    $stock=$cursor["Tag"]["StockAmount"];
+    $stock-=$productArray[$i]['count'];
+    $customerData = [
+        '$set' =>["Tag" => ["StockAmount"=> $stock]]
+    ];
+
+    $updateRes = $db->All_Products_Store->updateOne($options, $customerData);
+    
 }
 //type CartItems array to order
 $order["CartItems"]=$CartItems;
@@ -189,15 +199,15 @@ $order["PurchaseDate"]=date('l jS \of F Y h:i:s A');
 //Echo result back to user
 if($returnVal->getInsertedCount() == 1){
     //iff succesfull type that and after 1s change page to user account page
-    echo '<script type="text/javascript">
-    window.onload=load; function load(){ 
-        console.log("dup");
-        document.getElementById("serwerResponse").innerHTML="<h1>Order succesfull</h1>";
-        setTimeout(function() {
-            window.location.replace("/e-commerce/user.php");
-           }, 1000);
-        }
-        </script>';
+  echo '<script type="text/javascript">
+   window.onload=load; function load(){ 
+      console.log("dup");
+     document.getElementById("serwerResponse").innerHTML="<h1>Order succesfull</h1>";
+      setTimeout(function() {
+         window.location.replace("/e-commerce/user.php");
+     }, 1000);
+     }
+     </script>';
 }
 else
 //else type error
