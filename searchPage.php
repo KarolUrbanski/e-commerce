@@ -105,7 +105,7 @@ foreach ($cursor as $prod){
     height: 460px;'>
 	<a href='product_page.php?id=".$prod['_id']."'>
 	<div class='icon-wraper'><a href='product_page.php?id=".$prod['_id']."'>
-	<img src='https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg'>
+    <img src='imgs/".$prod['Tag']['ImgUrl'] ."' width='150%' class='img-circle'>
 	</div>
 	<div class='icon-content-wraper'>
 	";
