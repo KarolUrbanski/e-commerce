@@ -78,9 +78,7 @@ $db = $mongoClient->EcommerceWeb;
         <div class="container">
             <div class="row">
                 <div class="col-2">
-                    <img src="imgs/candy.jpg" class="img-circle mt-60">
-                </div>
-                <div class="col-2">
+
                 <?php
 
 $filter  = ['_id' => new MongoDB\BSON\ObjectID($idString)];
@@ -91,6 +89,9 @@ $cursor = $db->All_Products_Store->findOne($filter);
 
 
 //Output the results
+echo " <img src='imgs/".$cursor['Tag']['ImgUrl'] ."' class='img-circle mt-60'>
+</div>
+<div class='col-2'>";
 echo "<h2>";
 echo $cursor['Name'];
 echo "</h2>";
