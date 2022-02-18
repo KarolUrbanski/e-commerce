@@ -98,10 +98,16 @@ echo "<p> Desciption: " . $cursor['Description']."</p>";
 echo "<br>Category: " . $cursor['Category'];
 echo "<br>Rating: ". $cursor['Rating']."/5";
 echo "<p><h3>Price: ".$cursor['Price']."£ </p> </h3>";
-echo " <input class='btn-standard' id='quantity' type='number' value='1' min='1' max='99'
+echo " <input class='btn-standard' id='quantity' type='number' value='1' min='1' max='".$cursor['Tag']['StockAmount']."'
 style='width: 2em; text-align: center;'>";
-echo "<button onclick=\"addToBasket('". $cursor['_id']."','". $cursor['Name']."')\"";
-echo "class='btn-standard'>To basket</button>"
+if($cursor['Tag']['StockAmount']<1){
+    echo "<button class='btn-standard'>Out of stock</button>";
+}
+else{
+    echo "<button onclick=\"addToBasket('". $cursor['_id']."','". $cursor['Name']."')\"";
+    echo "class='btn-standard'>To basket</button>";
+}
+
 
 ?>
                     

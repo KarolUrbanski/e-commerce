@@ -70,8 +70,15 @@ foreach ($cursor as $prod){
    echo "<br>";
    echo "</p>";
    echo "</div> </a>";
-   echo "<button onclick=\"addToBasket('". $prod['_id']."','". $prod['Name']."')\"";
-   echo "class='btn-standard'>To basket</button>";
+   //check for stock amount
+   if($prod['Tag']['StockAmount']<1){
+    echo "<button class='btn-standard'>Out of stock</button>";
+}
+else{
+    echo "<button onclick=\"addToBasket('". $prod['_id']."','". $prod['Name']."')\"";
+    echo "class='btn-standard'>To basket</button>";
+}
+
    echo " </div>";
    if($x %4 == 3){
 	echo "</div>";
