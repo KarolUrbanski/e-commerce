@@ -43,7 +43,7 @@
                             <li> <a href="index.html"> Home </a> </li>
                             <li> <a href="index.html#best_sellers"> Best sellers </a> </li>
                             <li> <a href="products-cattegories.html"> All products </a> </li>
-                            <li> <a href="#see_also"> Basket </a> </li>
+                            <li> <a href="basket.html"> Basket </a> </li>
                             <li> <a href="index.html#about_us"> About us </a> </li>
                         </ul>
 
@@ -72,7 +72,7 @@
                                     last day of discount! <br>
                                     :)
                                 </h1>
-                                <a href="product_page.html" class="btn-standard">Check the offer!</a>
+                                <a href="product_page.php?id=620ccef5c9a3c8c08cc421c4" class="btn-standard">Check the offer!</a>
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
                                     last day of discount! <br>
                                     :)
                                 </h1>
-                                <a href="product_page.html" class="btn-standard">Check the offer!</a>
+                                <a href="product_page.php?id=620ccef5c9a3c8c08cc421c4" class="btn-standard">Check the offer!</a>
                             </div>
                         </div>
 
@@ -94,7 +94,7 @@
                                     last day of discount! <br>
                                     :)
                                 </h1>
-                                <a href="product_page.html" class="btn-standard">Check the offer!</a>
+                                <a href="product_page.php?id=620ccef5c9a3c8c08cc421c4" class="btn-standard">Check the offer!</a>
                             </div>
                         </div>
 
@@ -110,8 +110,11 @@
             style="height: 55vh; background-color: rgba(0, 0, 0, 0.05); border-radius: 1%; margin-top: 30px;">
             <div class="row ">
                 <div class="col-1 icon-content-wraper">
+                   
                     <div id="server">Loading...</div>
+               
                 </div>
+           
             </div>
         </div>
 
@@ -181,18 +184,24 @@ function getBasket(){
 function loadBasket(){
     let basket = getBasket();//Load or create basket
     //Build string with basket HTML
-    let htmlStr = "<form action='checkout.php' method='post'>";
+    let htmlStr = "<form action='checkout.php' method='post'> "; 
+    htmlStr +="<h1>Products in basket: </h1>";
+    htmlStr +="<table id='basket-Table'>";
     let prodIDs = [];
     for(let i=0; i<basket.length; i++){
+        //checks if there is null in array( coused by deleting dublicates)
         if(basket[i]==null){
         console.log("skip");
         }
         else{
-        htmlStr += "Product name: " + basket[i].name + " <br>";
-        htmlStr += "Quantity: " + basket[i].quantity + "<br>";
+        htmlStr +="<tr>";
+        htmlStr += "<td>Product name: " + basket[i].name + " </td>";
+        htmlStr += "<td>Quantity: " + basket[i].quantity + "</td>";
+        htmlStr +="</tr>";
         prodIDs.push({id: basket[i].id, count: basket[i].quantity});//Add to product array
         }
     }
+    htmlStr += "</table>";
     //check if basket is empty
     if(basket.length < 1 ){
         htmlStr += "Empty Basket :( <br>";
@@ -202,10 +211,11 @@ function loadBasket(){
 
     //Add hidden field to form that contains stringified version of product ids.
     htmlStr += "<input type='hidden' name='prodIDs' value='" + JSON.stringify(prodIDs) + "'>";
-    
+    htmlStr += "<div class='row mt-60'>";
     //Add checkout and empty basket buttons
-    htmlStr += "<br><button type='submit' value='Checkout' class='btn-standard'>Checkout</button></form>";
-    htmlStr += "<br><button onclick='emptyBasket()' class='btn-standard'>Empty Basket</button>";
+    htmlStr += "<div class='col-2'><button onclick='emptyBasket()' class='btn-standard' >Empty Basket</button></div>";
+    htmlStr += "<div class='col-2'><button type='submit' value='Checkout' class='btn-standard btn-green' >Checkout</button></div></div></form>";
+    
 }
     //Display nubmer of products in basket
     document.getElementById("server").innerHTML = htmlStr;
@@ -221,7 +231,7 @@ function readBasket(){
 
 
 function appended(basket){
-        //check if there are  dublicates and appends them
+        //check if there are  dublicates in basket and appends them
         //then deletes the dublicates
     for(let i=0; i<basket.length; ++i){
         if(basket[i]==null){

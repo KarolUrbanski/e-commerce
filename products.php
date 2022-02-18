@@ -41,7 +41,6 @@ $cursor = $db->All_Products_Store->find($filter, $options);
 
 
 //Output the results
-echo "<h1>Results</h1>";
 $x=0;
 foreach ($cursor as $prod){
 	if($x %4 == 0){

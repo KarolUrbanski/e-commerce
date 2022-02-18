@@ -59,7 +59,7 @@ $email=$_SESSION['loggedInUser']
                             <li> <a href="index.html"> Home </a> </li>
                             <li> <a href="index.html#best_sellers"> Best sellers </a> </li>
                             <li> <a href="products-cattegories.html"> All products </a> </li>
-                            <li> <a href="#see_also"> Basket </a> </li>
+                            <li> <a href="basket.html"> Basket </a> </li>
                             <li> <a href="index.html#about_us"> About us </a> </li>
                         </ul>
 
@@ -196,7 +196,7 @@ echo "</h1></p>";
                     <?php
                     echo "<input type='hidden' name='prodIDs' value='" .$prodIDs."'>";
                     ?>
-                 <button type="submit" onclick="emptyBasket()" class="btn-standard" >Order</button>
+                 <button type="submit" onclick="emptyBasket()" class="btn-standard mt-60 btn-green" >Order</button>
                  </form>
                 </div>
                 </div>

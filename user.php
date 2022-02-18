@@ -130,7 +130,13 @@ $email=$_SESSION['loggedInUser']
                     echo "Order id: " . $cust['_id'];
                     echo "<br> Date: ". $cust['PurchaseDate'];
                     echo "<br>Order Price: ". $cust['TotalPrice'];
-                    echo "<hr></p>";
+                    echo "<br>Products: <table>";
+                    foreach ($cust['CartItems'] as $prod){
+                        echo  "<tr>";
+                        echo "<td style='text-align:center;font-size:small;'>- ".$prod['Name']." x".$prod['Quantity']."</td>";
+                        echo "</tr>";
+                    }
+                    echo "</table><hr></p>";
                 }
 
 

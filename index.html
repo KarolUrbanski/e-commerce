@@ -70,10 +70,10 @@
                     <div class="content">
                         <h1>
                             E-commerce website, <br>
-                            Visuals only, <br>
+                            CST 2120 – Coursework 2, <br>
                             CandyCrush
                         </h1>
-                        <a href="#best_sellers" class="btn-standard">Check the offer!</a>
+                        <a href="product_page.php?id=620ccef5c9a3c8c08cc421c4" class="btn-standard">Check the offer!</a>
                     </div>
                 </div>
 
@@ -81,10 +81,10 @@
                     <div class="content">
                         <h1>
                             E-commerce website, <br>
-                            Visuals only, <br>
+                            CST 2120 – Coursework 2, <br>
                             CandyCrush
                         </h1>
-                        <a href="#best_sellers" class="btn-standard">Check the offer!</a>
+                        <a href="product_page.php?id=620ccef5c9a3c8c08cc421c4" class="btn-standard">Check the offer!</a>
                     </div>
                 </div>
 
@@ -92,10 +92,10 @@
                     <div class="content">
                         <h1>
                             E-commerce website, <br>
-                            Visuals only, <br>
+                            CST 2120 – Coursework 2, <br>
                             CandyCrush
                         </h1>
-                        <a href="#best_sellers" class="btn-standard">Check the offer!</a>
+                        <a href="product_page.php?id=620ccef5c9a3c8c08cc421c4" class="btn-standard">Check the offer!</a>
                     </div>
                 </div>
 
@@ -118,42 +118,7 @@
         <div class="grey-bg">
             <div class="container">
                 <div class="row mt-60">
-                    <div class="col-3"><a href="product_page.html">
-                            <div class="icon-wraper">
-                                <img src="https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg">
-                            </div>
-                            <div class="icon-content-wraper">
-                                <h3> Candy1 </h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
-                                    ut
-                                    labore et dolore magna aliqua.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-3"><a href="product_page.html">
-                            <div class="icon-wraper">
-                                <img src="https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg">
-                            </div>
-                            <div class="icon-content-wraper">
-                                <h3> Candy 2 </h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
-                                    ut
-                                    labore et dolore magna aliqua.</p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-3"><a href="product_page.html">
-                            <div class="icon-wraper">
-                                <img src="https://icon-library.com/images/bubble-gum-icon/bubble-gum-icon-21.jpg">
-                            </div>
-                            <div class="icon-content-wraper">
-                                <h3> Candy 3 </h3>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt
-                                    ut
-                                    labore et dolore magna aliqua.</p>
-                            </div>
-                        </a>
-                    </div>
+                    <div id="ServerContent">Loading...</div>
                 </div>
             </div>
         </div>
@@ -232,3 +197,22 @@
 </body>
 
 </html>
+<script>
+    	window.onload = () =>{
+		let request= new XMLHttpRequest();
+
+		request.onload = () => {
+			if (request.status === 200) {
+				let responseData = request.responseText;
+
+				document.getElementById('ServerContent').innerHTML = responseData;
+			}
+			else
+				alert("error communicating wiuth serwer: " + request.status)
+		};
+
+		request.open("GET","products.php?Category=Chocolate");
+		request.send();
+	}
+
+</script>
