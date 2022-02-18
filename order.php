@@ -62,10 +62,11 @@ for($i=0; $i<count($productArray); $i++){
     $totalPrice=$totalPrice+($cursor['Price']*$productArray[$i]['count']);
 
     //change item stock by product oreder quantity
-    $stock=$cursor["Tag"]["StockAmount"];
+    $cursor=$cursor["Tag"];
+    $stock=$cursor["StockAmount"];
     $stock-=$productArray[$i]['count'];
     $customerData = [
-        '$set' =>["Tag" => ["StockAmount"=> $stock]]
+        '$set' =>["Tag.StockAmount" => $stock]
     ];
 
     $updateRes = $db->All_Products_Store->updateOne($options, $customerData);
