@@ -259,6 +259,7 @@ nav li:hover {
     border: none;
     background-color: white;
     border-radius: 40px;
+  
 }
 
 .searchInput {
@@ -567,3 +568,22 @@ footer p {
         padding: 0 6px; 
     }
 }
+#feedback{
+    justify-content: center;
+    }
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        justify-content: center;
+      }
+      
+      td, th {
+        border: 3px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }

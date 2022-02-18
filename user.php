@@ -120,7 +120,7 @@ $email=$_SESSION['loggedInUser']
                     <?php
 
                     //Find all of the orders that match  this criteria
-                	$options = ['Customer-details.email' => $email];
+                	$options = ['CustomerInfo.email' => $email];
 
                     $cursor = $db->Orders->find($options);
 
@@ -128,7 +128,7 @@ $email=$_SESSION['loggedInUser']
                 foreach ($cursor as $cust){
                     echo "<p>";
                     echo "Order id: " . $cust['_id'];
-                    echo "<br> Date: ". $cust['Date'];
+                    echo "<br> Date: ". $cust['PurchaseDate'];
                     echo "<br>Order Price: ". $cust['TotalPrice'];
                     echo "<hr></p>";
                 }
@@ -224,6 +224,8 @@ $email=$_SESSION['loggedInUser']
 
     <!-- Script for checking if logged in-->
     <script src="JS/check-login.js"></script>
+    <!-- Script for search-->
+    <script src="js/search.js"></script>
 
 </body>
 

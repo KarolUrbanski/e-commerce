@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/imageSlider/css/style.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="assets/articleProgresBar/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -39,13 +40,14 @@
                     <h2> Login - staff only</h2>
                 </div>
             </div>
+
             <div class="row icon-content-wraper">
-                <form action="cms-view-products.html">
+                <form action="cms-login.php" id="form" method="post">
                     <div class="col-3 "><br></div>
                     <div class="col-3 ">
                         <div class="input-container">
-                            <input type="email" id="email" name="email" placeholder=" ">
-                            <label for="password">Email:</label>
+                            <input type="text" id="email" name="email" placeholder=" ">
+                            <label for="email">Login:</label>
                         </div>
 
                         <div class="input-container">
@@ -54,15 +56,25 @@
                         </div>
 
                     </div>
+                    
                     <div class="col-3 "><br></div>
                     <div class="col-1 mt-60">
                         <input id="Login" class="btn-standard" type="submit" name="Login" value="Login" />
                     </div>
+                    <div class="col-1">
+                    <div id="feedback">
+                        <p>Dynamically loaded content goes here</p>
+                    </div>
+                </div>
                 </form>
+                
             </div>
+            
         </div>
-
+        
     </section>
+
+   
 
     <footer>
 
@@ -79,16 +91,45 @@
 
     </footer>
 
-<!-- progress bar + script to it-->
-<div class="article-progress-bar"></div>
-<script src="assets/articleProgresBar/java/script.js"></script>
-
-<!-- mobile menu showing after clicking it-->
-<script src="js/mobile-nav.js"></script>
-
-<!-- script for image slider to change image every 5s-->
-<script src="assets/imageSlider/java/script.js"></script>
-
+    <div class="article-progress-bar"></div>
+    <script>
+            
+        $(document).ready(function(){
+            $("#form").submit(function(e){
+                
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "cms-login.php",
+                    data:{
+                        email: $("#email").val(),
+                        password: $("#password").val()
+                        },
+                    dataType: "json",
+                    success: function(response){
+                        if (response == 1){
+                            $("#feedback").text("login successful");
+                            sessionStorage.setItem("email", $("#email").val() );
+                            sessionStorage.setItem("password", $("#password").val());
+                            window.location="cms-view-products.php";
+                            
+                            
+                        }
+                        else if (response == 0){
+                            $("#feedback").text("login failed");
+                        }
+                    } 
+                    
+                
+                
+                })
+                    
+            });
+        });
+     </script>
+    <script src="assets/articleProgresBar/java/script.js"></script>
+    <script src="js/mobile-nav.js"></script>
+    <script src="assets/imageSlider/java/script.js"></script>
 
 </body>
 

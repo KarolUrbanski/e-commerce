@@ -28,7 +28,7 @@ $customer = $db->Customers_Data->findOne($options);
 
 $totalPrice=0;
 
-$order["Customer-details"]=[
+$order["CustomerInfo"]=[
     "first-name"=>$customer["first-name"],
     "last-name" =>$customer["last-name"],
     "email" => $customer["email"], 
@@ -47,8 +47,10 @@ for($i=0; $i<count($productArray); $i++){
 }
 $order["CartItems"]=$CartItems;
 $order["ProductTypes"]=$itemCount;
+$order["Status"]= "Successful";
+$order["VAT"]= "20%";
 $order["TotalPrice"]=$totalPrice;
-$order["Date"]=date('l jS \of F Y h:i:s A');
+$order["PurchaseDate"]=date('l jS \of F Y h:i:s A');
     $returnVal = $db->Orders->insertOne($order);
 
 //Echo result back to user
